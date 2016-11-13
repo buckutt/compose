@@ -1,0 +1,33 @@
+version: '2'
+services:
+    server:
+        image: buckless/server
+        ports:
+            - "3000:3000"
+        expose:
+            - "3000"
+        depends_on:
+            - database
+        environment:
+            DBHOST: database
+    client:
+        image: buckless/client
+        ports:
+            - "8081:8081"
+        environment:
+            API: server
+    admin:
+        image: buckless/admin
+        ports:
+            - "8082:8082"
+        environment:
+            API: server
+    database:
+        image: rethinkdb
+        expose:
+            - "28015"
+            - "29015"
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./data:/data
