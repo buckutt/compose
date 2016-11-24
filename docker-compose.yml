@@ -22,6 +22,12 @@ services:
             - "8082:8082"
         environment:
             API: server
+    manager:
+        image: buckless/manager
+        ports:
+            - "8083:8083"
+        environment:
+            API: server
     database:
         image: rethinkdb
         expose:
