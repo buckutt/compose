@@ -9,7 +9,7 @@ services:
         depends_on:
             - database
         environment:
-            DBHOST: database
+            NODE_ENV: docker
     client:
         image: buckless/client
         ports:
