@@ -22,7 +22,7 @@ services:
             NODE_ENV: prod
         volumes:
             - ./certificates:/usr/src/buckless-server/ssl/certificates
-
+            - ./log/server:/usr/src/buckless-server/log
     client:
         image: buckless/client
         ports:
