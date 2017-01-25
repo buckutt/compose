@@ -1,5 +1,15 @@
 version: '2'
 services:
+    database:
+        image: rethinkdb
+        expose:
+            - "28015"
+            - "29015"
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./data:/data
+
     server:
         image: buckless/server
         ports:
@@ -10,30 +20,20 @@ services:
             - database
         environment:
             NODE_ENV: prod
+        volumes:
+            - ./certificates:/usr/src/buckless-server/ssl/certificates
+
     client:
         image: buckless/client
         ports:
             - "8081:8081"
-        environment:
-            API: server
+
     admin:
         image: buckless/admin
         ports:
             - "8082:8082"
-        environment:
-            API: server
+
     manager:
         image: buckless/manager
         ports:
             - "8083:8083"
-        environment:
-            API: server
-    database:
-        image: rethinkdb
-        expose:
-            - "28015"
-            - "29015"
-        ports:
-            - "8080:8080"
-        volumes:
-            - ./data:/data
