@@ -1,0 +1,20 @@
+version: '2'
+services:
+    server:
+        volumes:
+            - ../server/src:/usr/src/buckless-server/src
+        command: ["npm", "run", "watch"]
+
+    client:
+        volumes:
+            - ../client/src:/usr/src/buckless-client/src
+
+    admin:
+        volumes:
+            - ../admin/src:/usr/src/buckless-admin/src
+        command: ["npm", "run", "watch"]
+
+    manager:
+        volumes:
+            - ../manager/src:/usr/src/buckless-manager/src
+            
