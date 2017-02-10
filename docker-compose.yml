@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
     database:
         image: rethinkdb
@@ -9,6 +9,11 @@ services:
             - "8080:8080"
         volumes:
             - ./data:/data
+        healthcheck:
+            test: "ls /data/rethinkdb_data/tmp/"
+            timeout: 5s
+            interval: 5s
+            retries: 10
 
     server:
         image: buckless/server
@@ -17,7 +22,8 @@ services:
         expose:
             - "3000"
         depends_on:
-            - database
+            database:
+                condition: service_healthy
         environment:
             NODE_ENV: prod
         volumes:
