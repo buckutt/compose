@@ -1,4 +1,3 @@
 .DS_Store
-data/
-admin/
-log/
+volumes/
+images/buckless-server/buckless-server.config.json

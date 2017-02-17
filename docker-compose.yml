@@ -1,7 +1,7 @@
 version: '2.1'
 services:
     nginx_service:
-        build: ./nginx-reverse-proxy
+        build: ./images/nginx-reverse-proxy
         container_name: nginx_server
         ports:
             - "80:80"
@@ -22,7 +22,7 @@ services:
         ports:
             - "8080:8080"
         volumes:
-            - ./data:/data
+            - ./volumes/database/data:/data
         healthcheck:
             test: "ls /data/rethinkdb_data/tmp/"
             timeout: 5s
@@ -30,39 +30,32 @@ services:
             retries: 10
 
     server:
-        image: buckless/server
+        build: ./images/buckless-server
         expose:
             - "3000"
         depends_on:
             database:
                 condition: service_healthy
         environment:
-            NODE_ENV: prod
+            NODE_ENV: production
         volumes:
-            - ./admin:/usr/src/buckless-server/ssl/certificates/admin
+            - ./volumes/server/admin-certificate:/usr/src/buckless-server/ssl/certificates/admin
+            - ./volumes/server/log:/usr/src/buckless-server/log
             - cert-auth:/usr/src/buckless-server/ssl/certificates/ca
             - certificates:/usr/src/buckless-server/ssl/certificates/server
             - manager-certificates:/usr/src/buckless-server/ssl/certificates/manager
-            - ./log/server:/usr/src/buckless-server/log
         healthcheck:
             test: "ls /usr/src/buckless-server/ready.lock"
             timeout: 5s
             interval: 5s
             retries: 10
 
-    client:
-        image: buckless/client
-        expose:
-            - "8081"
-        environment:
-            VIRTUAL_HOST: ~^client\..+\.inst.buckless\.com
-            VIRTUAL_PROTO: http
-
     admin:
         image: buckless/admin
         expose:
             - "8082"
         environment:
+            NODE_ENV: production
             VIRTUAL_HOST: ~^admin\..+\.inst.buckless\.com
             VIRTUAL_PROTO: http
 
@@ -74,6 +67,7 @@ services:
             server:
                 condition: service_healthy
         environment:
+            NODE_ENV: production
             VIRTUAL_HOST: ~^[^\.]+\.inst.buckless\.com
             VIRTUAL_PROTO: http
         volumes:
