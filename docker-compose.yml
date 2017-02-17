@@ -70,6 +70,9 @@ services:
         image: buckless/manager
         expose:
             - "8083"
+        depends_on:
+            server:
+                condition: service_healthy
         environment:
             VIRTUAL_HOST: ~^[^\.]+\.inst.buckless\.com
             VIRTUAL_PROTO: http
