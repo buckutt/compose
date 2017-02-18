@@ -54,6 +54,7 @@ services:
 
     admin:
         container_name: buck_admin
+        build: ./images/buckless-admin
         image: buckless/admin
         expose:
             - "8082"
@@ -64,6 +65,7 @@ services:
 
     manager:
         container_name: buck_manager
+        build: ./images/buckless-manager
         image: buckless/manager
         expose:
             - "8083"
