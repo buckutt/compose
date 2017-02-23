@@ -33,6 +33,7 @@ services:
     server:
         container_name: buck_server
         build: ./images/buckless-server
+        image: buckless/server
         expose:
             - "3000"
         depends_on:

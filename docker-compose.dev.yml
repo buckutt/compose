@@ -5,10 +5,6 @@ services:
             - ../server/src:/usr/src/buckless-server/src
         command: ["npm", "run", "watch"]
 
-    client:
-        volumes:
-            - ../client/src:/usr/src/buckless-client/src
-
     admin:
         volumes:
             - ../admin/src:/usr/src/buckless-admin/src
@@ -17,4 +13,3 @@ services:
     manager:
         volumes:
             - ../manager/src:/usr/src/buckless-manager/src
-            
