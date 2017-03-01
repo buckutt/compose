@@ -1,11 +1,11 @@
 {
     "NODE_ENV": "\"production\"",
     "app": {
-        "api": "\"https://server:3000\"",
+        "api": "\"https://api.john.inst.buckless.com\"",
         "loginMeanOfLogin": "\"cardId\"",
         "buyerMeanOfLogin": "\"cardId\"",
         "desfire"         : {
-            "key"   : "\"0\"",
+            "key"   : "\"KEY\"",
             "keyId" : "[4]",
             "fileId": "[2, 0, 0, 0, 14, 0, 0]",
             "appId" : "[64, 132, 245]"
