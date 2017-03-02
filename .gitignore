@@ -5,3 +5,4 @@ images/buckless-server/buckless-server.client.json
 images/buckless-admin/buckless-admin.config.json
 images/buckless-manager/buckless-manager.config.json
 images/buckless-manager/buckless-manager.manifest.json
+images/nginx-reverse-proxy/server.conf
