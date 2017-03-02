@@ -1,0 +1,50 @@
+{
+    "log": {
+        "console": {
+            "level": "debug"
+        },
+        "file": {
+            "level": "info"
+        },
+        "graylog": {
+            "level": "debug",
+            "gelfPro": {
+                "adapterName": "tcp",
+                "adapterOptions": {
+                    "host": "logs.buckless.com",
+                    "port": 12900
+                }
+            }
+        },
+        "morganStyle": "combined"
+    },
+    "http": {
+        "host": "0.0.0.0",
+        "port": 3000
+    },
+    "app": {
+        "name": "buckless_server",
+        "secret": "SECRET",
+        "domain"
+    },
+    "db": {
+        "host": "database",
+        "name": "buckless_server"
+    },
+    "mailer": {
+        "smtp": {
+            "host": "smtp.mailtrap.io",
+            "port": 2525,
+            "auth": {
+                "user": "user",
+                "pass": "pass"
+            }
+        }
+    },
+    "askpin": {
+        "from": "noreply@buckless.com",
+        "subject": "Buckless forgotten PIN",
+        "template": "Hi !\n You seems to have forgotten your pin. Follow <a href=\"{{=it.link}}\">this link</a> to generate a new one !",
+        "managerUrl": "http://john.inst.buckless.com"
+    }
+}
