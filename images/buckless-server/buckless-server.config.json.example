@@ -24,8 +24,7 @@
     },
     "app": {
         "name": "buckless_server",
-        "secret": "SECRET",
-        "domain"
+        "secret": "SECRET"
     },
     "db": {
         "host": "database",
