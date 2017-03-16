@@ -3,12 +3,12 @@ services:
     server:
         volumes:
             - ../server/src:/usr/src/buckless-server/src
-        command: ["npm", "run", "watch"]
+        command: ["npm", "run", "dev"]
 
     admin:
         volumes:
             - ../admin/src:/usr/src/buckless-admin/src
-        command: ["npm", "run", "watch"]
+        command: ["npm", "run", "dev"]
 
     manager:
         volumes:
