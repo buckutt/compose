@@ -61,7 +61,7 @@ services:
             - "8082"
         environment:
             NODE_ENV: production
-            VIRTUAL_HOST: ~^admin\..+\.inst.buckless\.com
+            VIRTUAL_HOST: ~^admin\..+\.buck.uttnetgroup\.net
             VIRTUAL_PROTO: http
 
     manager:
@@ -75,7 +75,7 @@ services:
                 condition: service_healthy
         environment:
             NODE_ENV: production
-            VIRTUAL_HOST: ~^[^\.]+\.inst.buckless\.com
+            VIRTUAL_HOST: ~^[^\.]+\.buck.uttnetgroup\.net
             VIRTUAL_PROTO: http
         volumes:
             - manager-certificates:/usr/src/buckless-manager/ssl:ro

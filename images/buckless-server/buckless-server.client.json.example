@@ -1,7 +1,7 @@
 {
     "NODE_ENV": "\"production\"",
     "app": {
-        "api": "\"https://api.john.inst.buckless.com\"",
+        "api": "\"https://api.buck.uttnetgroup.net\"",
         "loginMeanOfLogin": "\"cardId\"",
         "buyerMeanOfLogin": "\"cardId\"",
         "desfire"         : {
