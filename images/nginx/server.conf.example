@@ -1,0 +1,61 @@
+server {
+    server_name  _;
+    listen 80;
+    listen 443 ssl;
+
+    ssl_certificate /etc/nginx/certs/server-crt.pem;
+    ssl_certificate_key /etc/nginx/certs/server-key.pem;
+
+    access_log /var/log/nginx/access.log;
+    return 503;
+}
+
+server {
+    server_name ~^api\..+\.inst\.buckless\.com;
+    listen 80;
+    return 301 https://$request_uri;
+}
+
+server {
+    server_name ~^api\..+\.inst\.buckless\.com;
+    listen 443 ssl;
+
+    ssl_certificate /etc/nginx/certs/server-crt.pem;
+    ssl_certificate_key /etc/nginx/certs/server-key.pem;
+    ssl_client_certificate /etc/nginx/certs/ca/ca-crt.pem;
+    ssl_verify_client on;
+
+    ssl_session_cache builtin;
+
+    access_log /var/log/nginx/access.log;
+
+    location / {
+        proxy_pass http://server:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Certificate-Fingerprint $ssl_client_fingerprint;
+        proxy_redirect https://~^api\..+\.inst\.buckless\.com/ http://server:3000/;
+    }
+}
+
+server {
+    server_name ~^admin\..+\.inst\.buckless\.com;
+    listen 80;
+    access_log /var/log/nginx/access.log;
+    location / {
+        proxy_pass http://admin:8082;
+    }
+}
+
+server {
+    server_name ~^[^\.]+\.inst\.buckless\.com;
+    listen 80 ;
+    access_log /var/log/nginx/access.log;
+    location / {
+        proxy_pass http://manager:8083;
+    }
+}

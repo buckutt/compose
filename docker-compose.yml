@@ -1,8 +1,8 @@
 version: '2.1'
 services:
-    nginx_service:
+    nginx:
         container_name: buck_reverse_proxy
-        build: ./images/nginx-reverse-proxy
+        image: nginx
         ports:
             - "80:80"
             - "443:443"
@@ -10,9 +10,9 @@ services:
             server:
                 condition: service_healthy
         volumes:
-            - /var/run/docker.sock:/tmp/docker.sock:ro
             - certificates:/etc/nginx/certs/
             - cert-auth:/etc/nginx/certs/ca/
+            - ./images/nginx/server.conf:/etc/nginx/conf.d/server.conf
 
     database:
         container_name: buck_database
@@ -61,8 +61,6 @@ services:
             - "8082"
         environment:
             NODE_ENV: production
-            VIRTUAL_HOST: ~^admin\..+\.inst.buckless\.com
-            VIRTUAL_PROTO: http
 
     manager:
         container_name: buck_manager
@@ -75,8 +73,6 @@ services:
                 condition: service_healthy
         environment:
             NODE_ENV: production
-            VIRTUAL_HOST: ~^[^\.]+\.inst.buckless\.com
-            VIRTUAL_PROTO: http
         volumes:
             - manager-certificates:/usr/src/buckless-manager/ssl:ro
 
