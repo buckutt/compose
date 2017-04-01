@@ -17,7 +17,7 @@ server {
 }
 
 server {
-    server_name ~^api\..+\.inst\.buckless\.com;
+    server_name ~^api\..+\.inst\.buckless\.com nginx;
     listen 443 ssl;
 
     ssl_certificate /etc/nginx/certs/server-crt.pem;
