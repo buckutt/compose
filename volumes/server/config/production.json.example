@@ -23,20 +23,20 @@
         "port": 3000
     },
     "app": {
-        "name": "buckutt_server",
+        "name": "BuckUTT_server",
         "secret": "SECRET"
     },
     "db": {
         "host": "database",
-        "name": "buckutt_server"
+        "name": "BuckUTT_server"
     },
     "mailer": {
         "smtp": {
             "host": "smtp.utt.fr",
             "port": 25,
             "auth": {
-                "user": "user",
-                "pass": "pass"
+                "user": "ed37a3f7039a0e",
+                "pass": "d617720e0b2db0"
             }
         }
     },
@@ -44,6 +44,6 @@
         "from": "nepasrepondre-buck@utt.fr",
         "subject": "Buckutt: oubli de PIN",
         "template": "Salut !\n Il me semble que tu as oublié ton code PIN :(. Clique sur <a href=\"{{=it.link}}\">ce lien</a> pour en avoir un nouveau !",
-        "managerUrl": "http://buck.uttnetgroup.net"
+        "managerUrl": "https://buck.utt.fr"
     }
 }
