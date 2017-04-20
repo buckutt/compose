@@ -1,6 +1,6 @@
 version: '2.1'
 services:
-    nginx:
+    reverse_proxy:
         container_name: buck_reverse_proxy
         image: nginx
         ports:
@@ -12,7 +12,7 @@ services:
         volumes:
             - certificates:/etc/nginx/certs/
             - cert-auth:/etc/nginx/certs/ca/
-            - ./images/nginx/server.conf:/etc/nginx/conf.d/server.conf
+            - ./volumes/reverse_proxy/config/server.conf:/etc/nginx/conf.d/server.conf
 
     database:
         container_name: buck_database
@@ -32,7 +32,6 @@ services:
 
     server:
         container_name: buck_server
-        build: ./images/buckless-server
         image: buckless/server
         expose:
             - "3000"
@@ -41,7 +40,9 @@ services:
                 condition: service_healthy
         environment:
             NODE_ENV: production
+            SERVER_PROTOCOL: http
         volumes:
+            - ./volumes/server/config:/usr/src/buckless-server/config/profiles
             - ./volumes/server/admin-certificate:/usr/src/buckless-server/ssl/certificates/admin
             - ./volumes/server/log:/usr/src/buckless-server/log
             - cert-auth:/usr/src/buckless-server/ssl/certificates/ca
@@ -55,8 +56,8 @@ services:
 
     admin:
         container_name: buck_admin
-        build: ./images/buckless-admin
         image: buckless/admin
+        build: ./images/admin
         expose:
             - "8082"
         environment:
@@ -64,8 +65,8 @@ services:
 
     manager:
         container_name: buck_manager
-        build: ./images/buckless-manager
         image: buckless/manager
+        build: ./images/manager
         expose:
             - "8083"
         depends_on:
@@ -73,7 +74,10 @@ services:
                 condition: service_healthy
         environment:
             NODE_ENV: production
+            API_HOST: reverse_proxy
+            API_PORT: 443   
         volumes:
+            - ./volumes/manager/icons:/usr/src/buckless-manager/public/images
             - manager-certificates:/usr/src/buckless-manager/ssl:ro
 
 volumes:

@@ -23,27 +23,27 @@
         "port": 3000
     },
     "app": {
-        "name": "buckless_server",
-        "secret": "SECRET"
+        "name": "BuckUTT_server",
+        "secret": "NgWlfDWCbX4mPuxau1FmG3TPLHm7iglEA3mp1f8nrlT7zKDn8ZZAwWQOqUArvQBFfMEbFSAMnUHzgQW1FkczTiZYjPZWqdseNtk2"
     },
     "db": {
         "host": "database",
-        "name": "buckless_server"
+        "name": "BuckUTT_server"
     },
     "mailer": {
         "smtp": {
             "host": "smtp.mailtrap.io",
             "port": 2525,
             "auth": {
-                "user": "user",
-                "pass": "pass"
+                "user": "ed37a3f7039a0e",
+                "pass": "d617720e0b2db0"
             }
         }
     },
     "askpin": {
-        "from": "noreply@buckless.com",
-        "subject": "Buckless forgotten PIN",
-        "template": "Hi !\n You seems to have forgotten your pin. Follow <a href=\"{{=it.link}}\">this link</a> to generate a new one !",
-        "managerUrl": "http://john.inst.buckless.com"
+        "from": "buckutt-noreply@utt.fr",
+        "subject": "BuckUTT : oubli de PIN",
+        "template": "Salut !<br>Tu sembles avoir oublié ton PIN. Clique sur <a href=\"{{=it.link}}\">ce lien</a> pour en générer un nouveau !",
+        "managerUrl": "http://utt.inst.buckless.com"
     }
 }

@@ -17,7 +17,7 @@ server {
 }
 
 server {
-    server_name ~^api\..+\.inst\.buckless\.com nginx;
+    server_name ~^api\..+\.inst\.buckless\.com reverse_proxy;
     listen 443 ssl;
 
     ssl_certificate /etc/nginx/certs/server-crt.pem;
@@ -46,8 +46,25 @@ server {
     server_name ~^admin\..+\.inst\.buckless\.com;
     listen 80;
     access_log /var/log/nginx/access.log;
+
     location / {
         proxy_pass http://admin:8082;
+    }
+
+    location /__webpack_hmr {
+        proxy_pass http://admin:8082;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection “upgrade”;
+    }
+}
+
+server {
+    server_name ~^client\..+\.inst\.buckless\.com;
+    listen 80;
+    access_log /var/log/nginx/access.log;
+    location / {
+        proxy_pass http://client:8081;
     }
 }
 

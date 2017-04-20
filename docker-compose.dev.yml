@@ -1,15 +1,43 @@
 version: '2.1'
 services:
     server:
+        command: ["yarn", "dev"]
         volumes:
             - ../server/src:/usr/src/buckless-server/src
-        command: ["npm", "run", "dev"]
+        environment:
+            NODE_ENV: development
 
     admin:
         volumes:
             - ../admin/src:/usr/src/buckless-admin/src
-        command: ["npm", "run", "dev"]
+            - ./images/admin/config:/usr/src/buckless-admin/config/profiles
+        command: ["yarn", "dev"]
 
+        environment:
+            NODE_ENV: development
+        ports:
+            - "8082:8082"
     manager:
+        command: ["yarn", "dev"]
         volumes:
             - ../manager/src:/usr/src/buckless-manager/src
+            - ../manager/build:/usr/src/buckless-manager/build
+            - ./images/manager/config:/usr/src/buckless-manager/config/profiles
+        environment:
+            NODE_ENV: development
+            API_HOST: reverse_proxy
+            API_PORT: 443
+        ports:
+            - "8083:8083"
+    client:
+        container_name: buck_client
+        image: buckless/client
+        command: ["yarn", "dev"]
+        volumes:
+            - ../client/src:/usr/src/buckless-client/src
+            - ../client/build:/usr/src/buckless-client/build
+            - ./volumes/client/config:/usr/src/buckless-client/config/profiles
+        environment:
+            NODE_ENV: development
+        ports:
+            - "8081:8081"

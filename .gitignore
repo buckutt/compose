@@ -1,7 +1,7 @@
 .DS_Store
-volumes/
-images/buckless-server/buckless-server.config.json
-images/buckless-server/buckless-server.client.json
-images/buckless-admin/buckless-admin.config.json
-images/buckless-manager/buckless-manager.config.json
-images/buckless-manager/buckless-manager.manifest.json
+volumes/**/*.json
+volumes/**/*.conf
+volumes/**/*.log
+volumes/database/data
+volumes/server/admin-certificate
+images/**/*.json
