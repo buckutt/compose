@@ -11,13 +11,13 @@ server {
 }
 
 server {
-    server_name ~^api\..+\.inst\.buckless\.com;
+    server_name api.buck.utt.fr;
     listen 80;
     return 301 https://$request_uri;
 }
 
 server {
-    server_name ~^api\..+\.inst\.buckless\.com reverse_proxy;
+    server_name api.buck.utt.fr reverse_proxy;
     listen 443 ssl;
 
     ssl_certificate /etc/nginx/certs/server-crt.pem;
@@ -38,12 +38,12 @@ server {
         proxy_set_header Host $http_host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Certificate-Fingerprint $ssl_client_fingerprint;
-        proxy_redirect https://~^api\..+\.inst\.buckless\.com/ http://server:3000/;
+        proxy_redirect https://api.buck.utt.fr/ http://server:3000/;
     }
 }
 
 server {
-    server_name ~^admin\..+\.inst\.buckless\.com;
+    server_name admin.buck.utt.fr;
     listen 80;
     access_log /var/log/nginx/access.log;
 
@@ -60,7 +60,7 @@ server {
 }
 
 server {
-    server_name ~^client\..+\.inst\.buckless\.com;
+    server_name client.buck.utt.fr;
     listen 80;
     access_log /var/log/nginx/access.log;
     location / {
@@ -69,7 +69,7 @@ server {
 }
 
 server {
-    server_name ~^[^\.]+\.inst\.buckless\.com;
+    server_name buck.utt.fr;
     listen 80 ;
     access_log /var/log/nginx/access.log;
 
