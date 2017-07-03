@@ -11,6 +11,7 @@ services:
                 condition: service_healthy
         volumes:
             - certificates:/etc/nginx/certs/
+            - manager-certificates:/etc/nginx/certs/manager/
             - cert-auth:/etc/nginx/certs/ca/
             - ./volumes/reverse_proxy/config/server.conf:/etc/nginx/conf.d/server.conf
 
@@ -75,10 +76,9 @@ services:
         environment:
             NODE_ENV: production
             API_HOST: reverse_proxy
-            API_PORT: 443   
+            API_PORT: 443
         volumes:
             - ./volumes/manager/icons:/usr/src/buckless-manager/public/images
-            - manager-certificates:/usr/src/buckless-manager/ssl:ro
 
 volumes:
     certificates:

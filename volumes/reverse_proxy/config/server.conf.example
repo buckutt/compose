@@ -55,6 +55,28 @@ server {
     server_name buck.utt.fr;
     listen 80 ;
     access_log /var/log/nginx/access.log;
+
+    location /socket.io/ {
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection “upgrade”;
+
+        proxy_pass https://reverse_proxy;
+        proxy_ssl_server_name on;
+        proxy_ssl_certificate /etc/nginx/certs/manager/manager-crt.pem;
+        proxy_ssl_certificate_key /etc/nginx/certs/manager/manager-key.pem;
+    }
+
+    location ~ /api/ {
+        proxy_pass https://reverse_proxy;
+        proxy_ssl_server_name on;
+        proxy_ssl_certificate /etc/nginx/certs/manager/manager-crt.pem;
+        proxy_ssl_certificate_key /etc/nginx/certs/manager/manager-key.pem;
+
+        rewrite /api/login /services/login break;
+        rewrite ^/api/(.*)$ /services/manager/$1 break;
+    }
+
     location / {
         proxy_pass http://manager:8083;
     }
