@@ -46,6 +46,7 @@ server {
     server_name ~^admin\..+\.inst\.buckless\.com;
     listen 80;
     access_log /var/log/nginx/access.log;
+
     location / {
         proxy_pass http://admin:8082;
     }
@@ -75,6 +76,11 @@ server {
 
         rewrite /api/login /services/login break;
         rewrite ^/api/(.*)$ /services/manager/$1 break;
+    }
+
+    location ~ /images/ {
+        proxy_pass http://images:3400;
+        rewrite ^/images/(.*)$ /$1 break;
     }
 
     location / {
