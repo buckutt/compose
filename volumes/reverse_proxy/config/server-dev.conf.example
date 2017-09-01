@@ -3,15 +3,15 @@ server {
     listen 80;
     listen 443 ssl;
 
-    ssl_certificate /etc/nginx/certs/server-crt.pem;
-    ssl_certificate_key /etc/nginx/certs/server-key.pem;
+    ssl_certificate /etc/nginx/certs/buckutt/bundle.crt;
+    ssl_certificate_key /etc/nginx/certs/buckutt/buck.utt.fr.key;
 
     access_log /var/log/nginx/access.log;
     return 503;
 }
 
 server {
-    server_name api.buck.utt.fr;
+    server_name api.buck.utt.fr admin.buck.utt.fr buck.utt.fr;
     listen 80;
     return 301 https://$request_uri;
 }
@@ -20,8 +20,8 @@ server {
     server_name api.buck.utt.fr reverse_proxy;
     listen 443 ssl;
 
-    ssl_certificate /etc/nginx/certs/server-crt.pem;
-    ssl_certificate_key /etc/nginx/certs/server-key.pem;
+    ssl_certificate /etc/nginx/certs/buckutt/bundle.crt;
+    ssl_certificate_key /etc/nginx/certs/buckutt/buck.utt.fr.key;
     ssl_client_certificate /etc/nginx/certs/ca/ca-crt.pem;
     ssl_verify_client on;
 
@@ -44,7 +44,11 @@ server {
 
 server {
     server_name admin.buck.utt.fr;
-    listen 80;
+    listen 443 ssl;
+
+    ssl_certificate /etc/nginx/certs/buckutt/bundle.crt;
+    ssl_certificate_key /etc/nginx/certs/buckutt/buck.utt.fr.key;
+
     access_log /var/log/nginx/access.log;
 
     location / {
@@ -61,7 +65,11 @@ server {
 
 server {
     server_name client.buck.utt.fr;
-    listen 80;
+    listen 443 ssl;
+
+    ssl_certificate /etc/nginx/certs/buckutt/bundle.crt;
+    ssl_certificate_key /etc/nginx/certs/buckutt/buck.utt.fr.key;
+
     access_log /var/log/nginx/access.log;
     location / {
         proxy_pass http://client:8081;
@@ -70,7 +78,11 @@ server {
 
 server {
     server_name buck.utt.fr;
-    listen 80 ;
+    listen 443 ssl;
+
+    ssl_certificate /etc/nginx/certs/buckutt/bundle.crt;
+    ssl_certificate_key /etc/nginx/certs/buckutt/buck.utt.fr.key;
+
     access_log /var/log/nginx/access.log;
 
     location /socket.io/ {
