@@ -13,7 +13,7 @@ server {
 server {
     server_name api.buck.utt.fr admin.buck.utt.fr buck.utt.fr;
     listen 80;
-    return 301 https://$request_uri;
+    return 301 https://$host$request_uri;
 }
 
 server {
