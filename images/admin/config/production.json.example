@@ -1,3 +1,4 @@
 {
-    "api": "\"https://api.buck.utt.fr\""
+    "api": "\"https://api.buck.utt.fr\"",
+    "images": "\"https://buck.utt.fr/images\""
 }

@@ -80,6 +80,16 @@ services:
         volumes:
             - ./volumes/manager/icons:/usr/src/buckless-manager/public/images
 
+    images:
+        container_name: buck_images
+        image: buckless/image-server
+        expose:
+            - "3400"
+        volumes:
+            - ./volumes/image-server/images:/usr/src/buckless-image-server/images
+        environment:
+            NODE_ENV: production
+
 volumes:
     certificates:
         driver: local

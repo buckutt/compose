@@ -1,5 +1,6 @@
 {
     "api": "\"https://api.buck.utt.fr\"",
+    "images": "\"https://buck.utt.fr/images\"",
     "loginMeanOfLogin": "\"etuId\"",
     "buyerMeanOfLogin": "\"etuId\"",
     "desfire"         : {
