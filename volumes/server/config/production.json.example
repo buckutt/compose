@@ -27,8 +27,20 @@
         "secret": "SECRET"
     },
     "db": {
-        "host": "database",
-        "name": "BuckUTT_server"
+        "client": "pg",
+        "connection": {
+            "host"    : "sql",
+            "database": "buckless",
+            "user"    : "buckless",
+            "password": "buckless"
+        },
+        "pool": {
+            "min": 2,
+            "max": 10
+        },
+        "migrations": {
+            "tableName": "knex_migrations"
+        }
     },
     "mailer": {
         "smtp": {

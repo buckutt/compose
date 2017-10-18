@@ -16,30 +16,33 @@ services:
             - ./volumes/reverse_proxy/config/server.conf:/etc/nginx/conf.d/server.conf
             - ./volumes/reverse_proxy/certs:/etc/nginx/certs/buckutt/
 
-    database:
-        container_name: buck_database
-        image: rethinkdb
+    sql:
+        container_name: buck_sql
+        image: postgres:alpine
         expose:
-            - "28015"
-            - "29015"
+            - "5432"
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_DB=buckless
+            - POSTGRES_USER=buckless
+            - POSTGRES_PASSWORD=buckless
+        volumes:
+            - ./volumes/database/sql:/var/lib/postgresql/data
+
+    adminer:
+        image: adminer
+        restart: always
+        expose:
+            - "8080"
         ports:
             - "8080:8080"
-        volumes:
-            - ./volumes/database/data:/data
-        healthcheck:
-            test: "ls /data/rethinkdb_data/tmp/"
-            timeout: 5s
-            interval: 5s
-            retries: 10
 
     server:
         container_name: buck_server
         image: buckless/server
         expose:
             - "3000"
-        depends_on:
-            database:
-                condition: service_healthy
         environment:
             NODE_ENV: production
             SERVER_PROTOCOL: http
