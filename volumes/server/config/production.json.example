@@ -52,10 +52,22 @@
             }
         }
     },
+    "urls": {
+        "managerUrl": "https://b.inst.buckless.com"
+    },
     "askpin": {
         "from": "buckutt-noreply@utt.fr",
         "subject": "BuckUTT : oubli de PIN",
-        "template": "Salut !<br>Tu sembles avoir oublié ton PIN. Clique sur <a href=\"{{=it.link}}\">ce lien</a> pour en générer un nouveau !",
-        "managerUrl": "http://utt.inst.buckless.com"
+        "template": "Salut !<br>Tu sembles avoir oublié ton PIN. Clique sur <a href=\"{{=it.link}}\">ce lien</a> pour en générer un nouveau !"
+    },
+    "provider": {
+        "name": "payline",
+        "config": {
+            "id": "",
+            "password": "",
+            "url": "",
+            "contractNumber": "",
+            "merchantName": ""
+        }
     }
 }
