@@ -74,7 +74,7 @@ server {
         proxy_ssl_certificate /etc/nginx/certs/manager/manager-crt.pem;
         proxy_ssl_certificate_key /etc/nginx/certs/manager/manager-key.pem;
 
-        rewrite /api/providers/callback /providers/callback break;
+        rewrite /api/provider/callback /provider/callback break;
         rewrite /api/login /services/login break;
         rewrite ^/api/(.*)$ /services/manager/$1 break;
     }
