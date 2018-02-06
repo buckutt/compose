@@ -84,7 +84,7 @@ server {
         proxy_ssl_certificate_key /etc/nginx/certs/manager/manager-key.pem;
     }
 
-    location ~ /api/ {
+    location ^~ /api/ {
         proxy_pass https://reverse_proxy;
         proxy_ssl_server_name on;
         proxy_ssl_certificate /etc/nginx/certs/manager/manager-crt.pem;
@@ -95,7 +95,7 @@ server {
         rewrite ^/api/(.*)$ /services/manager/$1 break;
     }
 
-    location ~ /images/ {
+    location ^~ /images/ {
         proxy_pass http://images:3400;
         rewrite ^/images/(.*)$ /$1 break;
     }
