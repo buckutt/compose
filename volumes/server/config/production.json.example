@@ -56,9 +56,16 @@
         "managerUrl": "https://b.inst.buckless.com"
     },
     "askpin": {
-        "from": "buckutt-noreply@utt.fr",
-        "subject": "BuckUTT : oubli de PIN",
+        "from": "noreply@buckless.com",
+        "subject": "Buckless — oubli de PIN",
         "template": "Salut !<br>Tu sembles avoir oublié ton PIN. Clique sur <a href=\"{{=it.link}}\">ce lien</a> pour en générer un nouveau !"
+    },
+    "assigner": {
+        "ticketProvider": "ticketmaster",
+        "sendPINMail": true,
+        "from": "noreply@buckless.com",
+        "subject": "Buckless — Votre code PIN",
+        "template": "Hi !\nHere is your code PIN to access your own <a href=\"{{=it.link}}\">account</a> : {{=it.pin}}"
     },
     "provider": {
         "name": "payline",
