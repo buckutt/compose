@@ -1,4 +1,5 @@
 {
     "NODE_ENV": "\"production\"",
-    "name": "\"BuckUTT\""
+    "name": "\"BuckUTT\"",
+    "color": "\"#34495e\""
 }
