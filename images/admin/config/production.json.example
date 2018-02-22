@@ -1,5 +1,6 @@
 {
     "name": "\"BuckUTT\"",
     "api": "\"https://api.buck.utt.fr\"",
-    "images": "\"https://buck.utt.fr/images\""
+    "images": "\"https://buck.utt.fr/images\"",
+    "mainMol": "\"etuMail\""
 }
