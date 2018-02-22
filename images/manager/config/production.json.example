@@ -1,7 +1,7 @@
 {
     "NODE_ENV": "\"production\"",
     "name": "\"BuckUTT\"",
-    "color": "\"#34495e\""
+    "color": "\"#34495e\"",
     "footerBackground": "\"#4f6f8f\"",
     "footerColor": "\"#fff\"",
     "contactMail": "\"contact@buckless.com\"",
